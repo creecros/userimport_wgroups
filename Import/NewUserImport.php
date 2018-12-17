@@ -59,7 +59,7 @@ class NewUserImport extends Base
         $row = $this->prepare($row);
         
         $group_id = $row['group_id'];
-        unset $row['group_id'];
+        unset($row['group_id']);
         
         if ($this->validateCreation($row)) {
             $user_id = $this->userModel->create($row);
