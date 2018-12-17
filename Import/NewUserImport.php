@@ -149,7 +149,7 @@ class NewUserImport extends Base
     {
         $group_id = $this->db->table(GroupModel::TABLE)->eq('name', $name)->findOneColumn('id');
         if (empty($group_id)) {
-            $group_id = $this->create($name, $external_id);
+            $group_id = $this->groupModel->create($name, $external_id);
         }
         return $group_id;
     }
