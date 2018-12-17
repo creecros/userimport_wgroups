@@ -64,7 +64,7 @@ class NewUserImport extends Base
         if ($this->validateCreation($row)) {
             $user_id = $this->userModel->create($row);
             if ($user_id !== false) {
-                $this->groupMemberModel->addUser($group_id, $user_id);
+                if ($group_id != 0) { $this->groupMemberModel->addUser($group_id, $user_id); }
                 $this->logger->debug('UserImport: imported successfully line '.$line_number);
                 $this->counter++;
             } else {
@@ -147,10 +147,13 @@ class NewUserImport extends Base
      */
     public function getOrCreateGroupByName($name, $external_id ='')
     {
-        $group_id = $this->db->table(GroupModel::TABLE)->eq('name', $name)->findOneColumn('id');
-        if (empty($group_id)) {
-            $group_id = $this->groupModel->create($name, $external_id);
-        }
-        return $group_id;
+        if (!empty($name)) {
+            $group_id = $this->db->table(GroupModel::TABLE)->eq('name', $name)->findOneColumn('id');
+            if (empty($group_id)) {
+                $group_id = $this->groupModel->create($name, $external_id);
+            }
+            return $group_id;
+        } else {
+            return 0;
     }
 }
