@@ -40,7 +40,7 @@ class Plugin extends Base
 
     public function getPluginDescription()
     {
-        return t('Import User's with Group');
+        return t('Import Users with Group');
     }
 
     public function getPluginAuthor()
