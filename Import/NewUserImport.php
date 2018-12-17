@@ -155,5 +155,6 @@ class NewUserImport extends Base
             return $group_id;
         } else {
             return 0;
+        }
     }
 }
